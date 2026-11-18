@@ -1,71 +1,38 @@
 
-/* =================================
-   NAMAZ TIME - LANGUAGE SYSTEM
-   Developer: Najmul Islam Sorif
-================================= */
 
 (function () {
-  "use strict";
+  const KEY = "namaz-time-language";
 
-  const STORAGE_KEY = "namaz-time-language";
-
-  function getSavedLanguage() {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      return saved === "bn" ? "bn" : "en";
-    } catch (error) {
-      return "en";
-    }
-  }
-
-  function setLanguage(language) {
-    const lang = language === "bn" ? "bn" : "en";
-
+  function setLanguage(lang) {
     document.documentElement.lang = lang;
 
-    document.querySelectorAll("[data-en][data-bn]")
-      .forEach(function (element) {
-        const translation = element.getAttribute(
-          "data-" + lang
-        );
+    document.querySelectorAll("[data-en][data-bn]").forEach(function (el) {
+      el.textContent = lang === "bn"
+        ? el.getAttribute("data-bn")
+        : el.getAttribute("data-en");
+    });
 
-        if (translation !== null) {
-          element.textContent = translation;
-        }
-      });
+    document.querySelectorAll(".lang-toggle").forEach(function (btn) {
+      btn.textContent = lang === "bn" ? "English" : "বাংলা";
+      btn.setAttribute(
+        "aria-label",
+        lang === "bn" ? "Switch to English" : "বাংলায় পরিবর্তন করুন"
+      );
+    });
 
-    document.querySelectorAll(".lang-toggle")
-      .forEach(function (button) {
-        button.textContent = lang === "en"
-          ? "বাংলা"
-          : "English";
-
-        button.setAttribute(
-          "aria-label",
-          lang === "en"
-            ? "Switch to Bengali"
-            : "Switch to English"
-        );
-      });
-
-    try {
-      localStorage.setItem(STORAGE_KEY, lang);
-    } catch (error) {
-      // Language still works for this page.
-    }
+    localStorage.setItem(KEY, lang);
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    setLanguage(getSavedLanguage());
+    const saved = localStorage.getItem(KEY) || "en";
 
-    document.querySelectorAll(".lang-toggle")
-      .forEach(function (button) {
-        button.addEventListener("click", function () {
-          const current =
-            document.documentElement.lang || "en";
+    setLanguage(saved);
 
-          setLanguage(current === "en" ? "bn" : "en");
-        });
+    document.querySelectorAll(".lang-toggle").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const current = document.documentElement.lang || "en";
+        setLanguage(current === "bn" ? "en" : "bn");
       });
+    });
   });
 })();

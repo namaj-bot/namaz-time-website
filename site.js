@@ -1,38 +1,69 @@
 
 
 (function () {
-  const KEY = "namaz-time-language";
+
+  "use strict";
 
   function setLanguage(lang) {
+
     document.documentElement.lang = lang;
 
     document.querySelectorAll("[data-en][data-bn]").forEach(function (el) {
-      el.textContent = lang === "bn"
-        ? el.getAttribute("data-bn")
-        : el.getAttribute("data-en");
+
+      el.textContent = el.getAttribute("data-" + lang);
+
     });
 
     document.querySelectorAll(".lang-toggle").forEach(function (btn) {
-      btn.textContent = lang === "bn" ? "English" : "বাংলা";
-      btn.setAttribute(
-        "aria-label",
-        lang === "bn" ? "Switch to English" : "বাংলায় পরিবর্তন করুন"
-      );
+
+      btn.textContent = lang === "en" ? "বাংলা" : "English";
+
     });
 
-    localStorage.setItem(KEY, lang);
+    try {
+
+      localStorage.setItem("namaz-time-language", lang);
+
+    } catch (e) {}
+
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const saved = localStorage.getItem(KEY) || "en";
+  function initLanguage() {
+
+    var saved = "en";
+
+    try {
+
+      saved = localStorage.getItem("namaz-time-language") || "en";
+
+    } catch (e) {}
 
     setLanguage(saved);
 
-    document.querySelectorAll(".lang-toggle").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        const current = document.documentElement.lang || "en";
-        setLanguage(current === "bn" ? "en" : "bn");
-      });
+    document.addEventListener("click", function (event) {
+
+      var btn = event.target.closest(".lang-toggle");
+
+      if (btn) {
+
+        var current = document.documentElement.lang || "en";
+
+        setLanguage(current === "en" ? "bn" : "en");
+
+      }
+
     });
-  });
+
+  }
+
+  if (document.readyState === "loading") {
+
+    document.addEventListener("DOMContentLoaded", initLanguage);
+
+  } else {
+
+    initLanguage();
+
+  }
+
 })();

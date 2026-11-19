@@ -1,5 +1,57 @@
 
-/* ===== NAMAZ TIME HOME PAGE DESIGN ===== */
+/* =================================
+   NAMAZ TIME - COMPLETE WEBSITE CSS
+================================= */
+
+:root {
+  --green: #087f5b;
+  --dark: #07543f;
+  --light: #e9f6ef;
+  --background: #f6faf7;
+  --white: #ffffff;
+  --text: #20352d;
+  --muted: #718078;
+  --border: #e2ebe5;
+  --shadow: 0 8px 28px rgba(0,60,40,.07);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, "Noto Sans Bengali", sans-serif;
+  background: var(--background);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--dark);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* ACCESSIBILITY */
 
 .skip-link {
   position: absolute;
@@ -9,54 +61,122 @@
 
 .skip-link:focus {
   left: 10px;
+  top: 10px;
   z-index: 999;
   background: white;
   padding: 12px;
 }
 
-header.site-header {
-  padding: 14px 5%;
-  gap: 18px;
+/* HEADER */
+
+.site-header {
+  width: 100%;
+  background: var(--white);
+  padding: 15px 5%;
+  display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--dark);
   font-size: 23px;
+  font-weight: 800;
   white-space: nowrap;
+  text-decoration: none;
 }
 
 .brand-mark {
   display: inline-grid;
   place-items: center;
-  background: #e6f4ed;
-  color: #087f5b;
-  width: 35px;
-  height: 35px;
-  border-radius: 10px;
-  margin-right: 7px;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: var(--light);
+  color: var(--green);
 }
 
-header.site-header nav {
-  gap: 20px;
+.site-header nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  flex-wrap: wrap;
 }
 
-header.site-header nav a {
+.site-header nav a {
+  color: var(--text);
   font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.site-header nav a:hover,
+.site-header nav a.active {
+  color: var(--green);
 }
 
 .lang-toggle {
-  font-size: 14px;
+  background: var(--light);
+  color: var(--dark);
+  border: 0;
+  border-radius: 25px;
   padding: 9px 17px;
+  font-size: 14px;
+  font-weight: 700;
 }
 
-/* Hero section */
+/* MAIN CONTENT */
 
-main .hero {
+main {
+  min-height: 65vh;
+}
+
+.page-main {
+  width: 90%;
+  max-width: 1100px;
+  margin: 45px auto;
+}
+
+.page-main.narrow {
+  max-width: 780px;
+}
+
+.page-heading {
+  margin-bottom: 28px;
+}
+
+.page-heading h1 {
+  font-size: 36px;
+  line-height: 1.3;
+  color: var(--dark);
+}
+
+.eyebrow {
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* HOME HERO */
+
+.hero {
+  width: 100%;
+  padding: 65px 6%;
   background: linear-gradient(135deg, #075e46, #109875);
   color: white;
-  padding: 65px 6%;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1.1fr .9fr;
   align-items: center;
   gap: 45px;
   border-radius: 0 0 28px 28px;
@@ -64,20 +184,19 @@ main .hero {
 
 .hero .eyebrow {
   color: #c4f4dc;
-  font-size: 14px;
-  font-weight: 700;
 }
 
 .hero h1 {
+  color: white;
   font-size: clamp(32px, 4vw, 48px);
   line-height: 1.2;
   margin: 18px 0;
 }
 
 .hero .lead {
+  color: #e6fff3;
   font-size: 16px;
   line-height: 1.8;
-  color: #e6fff3;
 }
 
 .actions {
@@ -87,27 +206,51 @@ main .hero {
   margin-top: 25px;
 }
 
-.actions .button {
-  font-size: 14px;
-  padding: 12px 19px;
+.button {
+  display: inline-block;
+  padding: 12px 21px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-align: center;
+  border: none;
+  text-decoration: none;
+}
+
+.button.primary {
+  background: var(--green);
+  color: white;
+}
+
+.hero .button.primary {
+  background: white;
+  color: var(--dark);
 }
 
 .button.secondary {
+  background: #e9f6ef;
+  color: var(--dark);
+}
+
+.button.light {
   background: white;
-  color: #075e46;
+  color: var(--dark);
+}
+
+.button:hover {
+  opacity: .88;
 }
 
 .status {
+  color: #d8f5e7;
   font-size: 13px;
   margin-top: 20px;
-  color: #d8f5e7;
 }
 
-/* Prayer card */
+/* PRAYER CARD */
 
 .prayer-card {
   background: white;
-  color: #18352c;
+  color: var(--text);
   border-radius: 20px;
   padding: 23px;
   box-shadow: 0 15px 40px rgba(0,0,0,.12);
@@ -118,21 +261,21 @@ main .hero {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 8px;
-  font-size: 17px;
+  gap: 10px;
   margin-bottom: 18px;
+  font-size: 17px;
 }
 
 .pill {
-  background: #e6f5ed;
-  color: #087f5b;
+  background: var(--light);
+  color: var(--green);
   border-radius: 20px;
   padding: 5px 11px;
   font-size: 11px;
 }
 
 .location {
-  color: #718078;
+  color: var(--muted);
   font-size: 12px;
   margin-bottom: 15px;
 }
@@ -142,28 +285,28 @@ main .hero {
   justify-content: space-between;
   align-items: center;
   padding: 12px 0;
-  border-bottom: 1px solid #e7eee9;
+  border-bottom: 1px solid var(--border);
   font-size: 14px;
 }
 
 .prayer-row small {
-  color: #718078;
+  color: var(--muted);
   font-size: 11px;
   margin-left: 4px;
 }
 
 .prayer-row b {
-  color: #087f5b;
+  color: var(--green);
   font-size: 14px;
 }
 
 .preview {
-  color: #849188;
+  color: var(--muted);
   font-size: 11px;
   margin-top: 16px;
 }
 
-/* Features */
+/* FEATURES */
 
 .features {
   width: 90%;
@@ -174,38 +317,44 @@ main .hero {
   gap: 20px;
 }
 
-.features article {
+.features article,
+.card,
+.policy-section {
   background: white;
   padding: 25px;
-  border: 1px solid #e3ebe6;
+  border: 1px solid var(--border);
   border-radius: 17px;
-  box-shadow: 0 8px 25px rgba(0,60,40,.05);
+  box-shadow: var(--shadow);
 }
 
 .features article > span {
   font-size: 27px;
-  color: #087f5b;
+  color: var(--green);
 }
 
-.features h2 {
-  font-size: 18px;
+.features h2,
+.card h2,
+.policy-section h2 {
+  color: var(--dark);
+  font-size: 19px;
   margin: 12px 0;
-  color: #075e46;
 }
 
-.features p {
-  color: #718078;
+.features p,
+.card p,
+.policy-section p {
+  color: var(--muted);
   font-size: 14px;
 }
 
-/* Contact section */
+/* CONTACT CTA */
 
 .cta {
   width: 90%;
   max-width: 1100px;
   margin: 50px auto;
   padding: 35px;
-  background: #075e46;
+  background: var(--dark);
   color: white;
   border-radius: 20px;
   display: flex;
@@ -216,6 +365,7 @@ main .hero {
 }
 
 .cta h2 {
+  color: white;
   font-size: 24px;
   margin-top: 8px;
 }
@@ -224,27 +374,51 @@ main .hero {
   color: #c4f4dc;
 }
 
-.button.light {
-  background: white;
-  color: #075e46;
+/* FOOTER */
+
+.site-footer {
+  background: #123c30;
+  color: #e4f5ed;
+  text-align: center;
+  padding: 30px 15px;
+  margin-top: 55px;
 }
 
-/* Mobile responsive */
+.site-footer a {
+  color: #a8e9ca;
+  margin: 0 8px;
+}
+
+.site-footer p {
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* MOBILE DESIGN */
 
 @media (max-width: 700px) {
-  header.site-header {
+
+  .site-header {
+    position: relative;
     flex-direction: column;
-    padding: 17px 10px;
-    gap: 14px;
+    padding: 15px 10px;
+    gap: 13px;
   }
 
-  header.site-header nav {
+  .site-header nav {
     justify-content: center;
     gap: 17px;
-    flex-wrap: wrap;
   }
 
-  main .hero {
+  .site-header nav a {
+    font-size: 13px;
+  }
+
+  .brand {
+    font-size: 22px;
+  }
+
+  .hero {
     grid-template-columns: 1fr;
     padding: 38px 22px;
     gap: 30px;
@@ -264,7 +438,10 @@ main .hero {
 
   .actions .button {
     width: 100%;
-    text-align: center;
+  }
+
+  .prayer-card {
+    padding: 19px;
   }
 
   .features {
@@ -274,9 +451,36 @@ main .hero {
 
   .cta {
     padding: 25px;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .cta h2 {
     font-size: 21px;
+  }
+
+  .page-main {
+    width: 92%;
+    margin: 30px auto;
+  }
+
+  .page-heading h1 {
+    font-size: 29px;
+  }
+}
+
+/* SMALL PHONES */
+
+@media (max-width: 380px) {
+  .site-header nav {
+    gap: 11px;
+  }
+
+  .site-header nav a {
+    font-size: 12px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
   }
 }
